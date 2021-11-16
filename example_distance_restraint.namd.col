@@ -1,0 +1,494 @@
+
+#
+# distance and rmsd restraint between 3 lipids and protein residues
+#
+Colvarstrajfrequency    100 # 1 is for testing, change back to 100
+Colvarsrestartfrequency 100
+
+
+colvar {
+    name lip_pock_DBC
+
+    rmsd { 
+        refpositionsfile restraints/lip_pock_rmsd.ref  
+        atoms { 
+             atomnumbers {40080 40099 40107 40195 40155 40210 40167 40750 40769 40777 40865 40825 40880 40837 47450 47469 47477 47565 47525 47580 47537}
+            #atomNameResidueRange  P  147 92 97
+            rotateReference
+            centerReference
+            fittingGroup {              # lipid atoms
+              atomsFile          restraints/lip_pock_rmsd.ref
+              atomsCol           O
+            } 
+            refPositionsFile      restraints/lip_pock_rmsd.ref
+        } 
+    }
+} 
+
+harmonicWalls {
+    name rmsd
+    colvars lip_pock_DBC
+    lowerWalls  0.0
+    upperWalls  7.745
+    forceConstant 100
+}
+
+
+colvar {
+  name lip_dist
+
+  distance {
+    group1 {
+      atomnumbers {40080 40099 40107 40195 40155 40210 40167 40750 40769 40777 40865 40825 40880 40837 47450 47469 47477 47565 47525 47580 47537}
+      #atomNameResidueRange  P   147 92 97
+      rotateReference
+      centerReference
+      fittingGroup {                    # protein atoms
+          atomsFile          restraints/lip_pock_rmsd.ref
+          atomsCol           O
+      } 
+      refPositionsFile restraints/lip_pock_rmsd.ref     # ref protein coords for fitting
+    }
+    group2 {
+      dummyAtom (0.473, -4.230, 8.706)  # center of cholesterol in reference coordinates
+    }
+  }
+}
+
+harmonicWalls {
+    name distance
+    colvars lip_dist
+    lowerWalls  0
+    upperWalls  6.169
+    forceConstant 100
+}
+
+
+colvar {
+    name lip299
+    width 0.5
+    rmsd { 
+        refpositionsfile restraints/lip_pock_rmsd.ref  
+        atoms { 
+             atomnumbers { 67818 67845 67905 67948 } # N C2  C2218 C316
+            rotateReference
+            centerReference
+            fittingGroup {              # lipid atoms
+              atomsFile          restraints/lip_pock_rmsd.ref
+              atomsCol           O
+            } 
+            refPositionsFile      restraints/lip_pock_rmsd.ref
+        } 
+    }
+} 
+harmonic {
+    colvars lip299
+    centers   0.0
+    forceConstant 10
+}
+
+colvar {
+  name lipdist299
+  distance {
+    group1 {
+      atomnumbers { 67818 67845 67905 67948 } # N C2  C2218 C316
+      #atomNameResidueRange  P   147 92 97
+      rotateReference
+      centerReference
+      fittingGroup {                    # protein atoms
+          atomsFile          restraints/lip_pock_rmsd.ref
+          atomsCol           O
+      } 
+      refPositionsFile restraints/lip_pock_rmsd.ref     # ref protein coords for fitting
+    }
+    group2 {
+      dummyAtom (15.03, 7.46, -6.76)  # center of cholesterol in reference coordinates
+    }
+  }
+}
+
+harmonic {
+    colvars lipdist299
+    centers  0
+    forceConstant 10
+}
+
+
+
+colvar {
+    name lip310
+    rmsd { 
+        refpositionsfile restraints/lip_pock_rmsd.ref  
+        atoms { 
+             atomnumbers {69292 69319 69379 69422} # N P C2 C28 C18 C8 C316
+            rotateReference
+            centerReference
+            fittingGroup {              # lipid atoms
+              atomsFile          restraints/lip_pock_rmsd.ref
+              atomsCol           O
+            } 
+            refPositionsFile      restraints/lip_pock_rmsd.ref
+        } 
+    }
+} 
+harmonic {
+    colvars lip310
+    centers  0.0
+    forceConstant 10
+}
+
+colvar {
+  name lipdist310
+  distance {
+    group1 {
+      atomnumbers {69292 69319 69379 69422} # N P C2 C28 C18 C8 C316
+      rotateReference
+      centerReference
+      fittingGroup {                    # protein atoms
+          atomsFile          restraints/lip_pock_rmsd.ref
+          atomsCol           O
+      } 
+      refPositionsFile restraints/lip_pock_rmsd.ref     # ref protein coords for fitting
+    }
+    group2 {
+      dummyAtom (12.57, 4.10, -4.28)  # center of cholesterol in reference coordinates
+    }
+  }
+}
+
+harmonic {
+    colvars lipdist310
+    centers  0
+    forceConstant 10
+}
+
+colvar {
+    name lip191
+    rmsd { 
+        refpositionsfile restraints/lip_pock_rmsd.ref  
+        atoms { 
+             atomnumbers {53346 53373 53433 53476} # N P C2 C28 C18 C8 C316
+            rotateReference
+            centerReference
+            fittingGroup {              # lipid atoms
+              atomsFile          restraints/lip_pock_rmsd.ref
+              atomsCol           O
+            } 
+            refPositionsFile      restraints/lip_pock_rmsd.ref
+        } 
+    }
+} 
+harmonic {
+    colvars lip191
+    centers  0.0
+    forceConstant 10
+}
+
+colvar {
+  name lipdist191
+  distance {
+    group1 {
+      atomnumbers {53346 53373 53433 53476} # N P C2 C28 C18 C8 C316
+      rotateReference
+      centerReference
+      fittingGroup {                    # protein atoms
+          atomsFile          restraints/lip_pock_rmsd.ref
+          atomsCol           O
+      } 
+      refPositionsFile restraints/lip_pock_rmsd.ref     # ref protein coords for fitting
+    }
+    group2 {
+      dummyAtom (-0.37, 5.56, -9.90)  # center of cholesterol in reference coordinates
+    }
+  }
+}
+
+harmonic {
+    colvars lipdist191
+    centers  0
+    forceConstant 10
+}
+
+colvar {
+    name lip123
+    rmsd { 
+        refpositionsfile restraints/lip_pock_rmsd.ref  
+        atoms { 
+             atomnumbers { 44234 44261 44321 44364} # N P C2 C28 C18 C8 C316
+            rotateReference
+            centerReference
+            fittingGroup {              # lipid atoms
+              atomsFile          restraints/lip_pock_rmsd.ref
+              atomsCol           O
+            } 
+            refPositionsFile      restraints/lip_pock_rmsd.ref
+        } 
+    }
+} 
+harmonic {
+    colvars lip123
+    centers  0.0
+    forceConstant 10
+}
+
+colvar {
+  name lipdist123
+  distance {
+    group1 {
+      atomnumbers { 44234 44261 44321 44364} # N P C2 C28 C18 C8 C316
+      #atomNameResidueRange  P   147 92 97
+      rotateReference
+      centerReference
+      fittingGroup {                    # protein atoms
+          atomsFile          restraints/lip_pock_rmsd.ref
+          atomsCol           O
+      } 
+      refPositionsFile restraints/lip_pock_rmsd.ref     # ref protein coords for fitting
+    }
+    group2 {
+      dummyAtom (7.08, 5.32, 16.65)  # center of cholesterol in reference coordinates
+    }
+  }
+}
+
+harmonic {
+    colvars lipdist123
+    centers  0
+    forceConstant 10
+}
+
+colvar {
+    name lip64
+    rmsd { 
+        refpositionsfile restraints/lip_pock_rmsd.ref  
+        atoms { 
+            atomnumbers {36328 36355 36415 36458} # N P C2 C28 C18 C8 C316
+            rotateReference
+            centerReference
+            fittingGroup {              # lipid atoms
+              atomsFile          restraints/lip_pock_rmsd.ref
+              atomsCol           O
+            } 
+            refPositionsFile      restraints/lip_pock_rmsd.ref
+        } 
+    }
+} 
+harmonic {
+    colvars lip64
+    centers  0.0
+    forceConstant 10
+}
+
+colvar {
+  name lipdist64
+  distance {
+    group1 {
+      atomnumbers {36328 36355 36415 36458} # N P C2 C28 C18 C8 C316
+      rotateReference
+      centerReference
+      fittingGroup {                    # protein atoms
+          atomsFile          restraints/lip_pock_rmsd.ref
+          atomsCol           O
+      } 
+      refPositionsFile restraints/lip_pock_rmsd.ref     # ref protein coords for fitting
+    }
+    group2 {
+      dummyAtom (10.30, 11.35, 6.25)  # center of cholesterol in reference coordinates
+    }
+  }
+}
+
+harmonic {
+    colvars lipdist64
+    centers  0
+    forceConstant 10
+}
+
+colvar {
+    name lip61
+    rmsd { 
+        refpositionsfile restraints/lip_pock_rmsd.ref  
+        atoms { 
+            atomnumbers {35926 35953 36013 36056} # N P C2 C28 C18 C8 C316
+            rotateReference
+            centerReference
+            fittingGroup {              # lipid atoms
+              atomsFile          restraints/lip_pock_rmsd.ref
+              atomsCol           O
+            } 
+            refPositionsFile      restraints/lip_pock_rmsd.ref
+        } 
+    }
+} 
+harmonic {
+    colvars lip61
+    centers  0.0
+    forceConstant 10
+}
+
+colvar {
+  name lipdist61
+  distance {
+    group1 {
+      atomnumbers {35926 35953 36013 36056} # N P C2 C28 C18 C8 C316
+      rotateReference
+      centerReference
+      fittingGroup {                    # protein atoms
+          atomsFile          restraints/lip_pock_rmsd.ref
+          atomsCol           O
+      } 
+      refPositionsFile restraints/lip_pock_rmsd.ref     # ref protein coords for fitting
+    }
+    group2 {
+      dummyAtom (-2.76, 4.31, 7.56)  # center of cholesterol in reference coordinates
+    }
+  }
+}
+
+harmonic {
+    colvars lipdist61
+    centers  0
+    forceConstant 10
+}
+
+colvar {
+    name lip81
+    rmsd { 
+        refpositionsfile restraints/lip_pock_rmsd.ref  
+        atoms { 
+             atomnumbers {38606 38633 38693 38736} # N P C2 C28 C18 C8 C316
+            rotateReference
+            centerReference
+            fittingGroup {              # lipid atoms
+              atomsFile          restraints/lip_pock_rmsd.ref
+              atomsCol           O
+            } 
+            refPositionsFile      restraints/lip_pock_rmsd.ref
+        } 
+    }
+} 
+harmonic {
+    colvars lip81
+    centers   0.0
+    forceConstant 10
+}
+
+colvar {
+  name lipdist81
+  distance {
+    group1 {
+      atomnumbers {38606 38633 38693 38736} # N P C2 C28 C18 C8 C316
+      rotateReference
+      centerReference
+      fittingGroup {                    # protein atoms
+          atomsFile          restraints/lip_pock_rmsd.ref
+          atomsCol           O
+      } 
+      refPositionsFile restraints/lip_pock_rmsd.ref     # ref protein coords for fitting
+    }
+    group2 {
+      dummyAtom (-14.52,-8.95, 5.45)  # center of cholesterol in reference coordinates
+    }
+  }
+}
+
+harmonic {
+    colvars lipdist81
+    centers  0
+    forceConstant 10
+}
+
+colvar {
+    name lip53
+    rmsd { 
+        refpositionsfile restraints/lip_pock_rmsd.ref  
+        atoms { 
+             atomnumbers {34854 34881 34941 34984} # N P C2 C28 C18 C8 C316
+            rotateReference
+            centerReference
+            fittingGroup {              # lipid atoms
+              atomsFile          restraints/lip_pock_rmsd.ref
+              atomsCol           O
+            } 
+            refPositionsFile      restraints/lip_pock_rmsd.ref
+        } 
+    }
+} 
+harmonic {
+    colvars lip53
+    centers  0.0
+    forceConstant 10
+}
+
+colvar {
+  name lipdist53
+  distance {
+    group1 {
+      atomnumbers {34854 34881 34941 34984} # N P C2 C28 C18 C8 C316
+      rotateReference
+      centerReference
+      fittingGroup {                    # protein atoms
+          atomsFile          restraints/lip_pock_rmsd.ref
+          atomsCol           O
+      } 
+      refPositionsFile restraints/lip_pock_rmsd.ref     # ref protein coords for fitting
+    }
+    group2 {
+      dummyAtom (-2.45, -14.32, 7.94)  # center of cholesterol in reference coordinates
+    }
+  }
+}
+
+harmonic {
+    colvars lipdist53
+    centers  0
+    forceConstant 10
+}
+
+colvar {
+    name lip137
+    rmsd { 
+        refpositionsfile restraints/lip_pock_rmsd.ref  
+        atoms { 
+             atomnumbers {46110 46137 46197 46240} # N P C2 C28 C18 C8 C316
+            rotateReference
+            centerReference
+            fittingGroup {              # lipid atoms
+              atomsFile          restraints/lip_pock_rmsd.ref
+              atomsCol           O
+            } 
+            refPositionsFile      restraints/lip_pock_rmsd.ref
+        } 
+    }
+} 
+harmonic {
+    colvars lip137
+    centers  0.0
+    forceConstant 10
+}
+
+colvar {
+  name lipdist137
+  distance {
+    group1 {
+      atomnumbers {46110 46137 46197 46240} # N P C2 C28 C18 C8 C316
+      rotateReference
+      centerReference
+      fittingGroup {                    # protein atoms
+          atomsFile          restraints/lip_pock_rmsd.ref
+          atomsCol           O
+      } 
+      refPositionsFile restraints/lip_pock_rmsd.ref     # ref protein coords for fitting
+    }
+    group2 {
+      dummyAtom (7.11, -18.33, 4.09)  # center of cholesterol in reference coordinates
+    }
+  }
+}
+
+harmonic {
+    colvars lipdist137
+    centers  0
+    forceConstant 10
+}
+
