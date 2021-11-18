@@ -1,0 +1,53 @@
+
+#
+# distance and rmsd restraint between 3 lipids and protein residues
+#
+Colvarstrajfrequency    1 # 1 is for testing, change back to 100
+Colvarsrestartfrequency 1
+
+
+colvar {
+    name lip_pock_DBC
+
+    upperWall           1.5
+    upperWallConstant   0
+
+    rmsd { 
+        refpositionsfile restraints/lip_pock_rmsd.ref  
+        atoms { 
+             atomnumbers {40080 40099 40107 40195 40155 40210 40167 40750 40769 40777 40865 40825 40880 40837 47450 47469 47477 47565 47525 47580 47537}
+            #atomNameResidueRange  P  147 92 97
+            rotateReference
+            centerReference
+            fittingGroup {              # lipid atoms
+              atomsFile          restraints/lip_pock_rmsd.ref
+              atomsCol           O
+            } 
+            refPositionsFile      restraints/lip_pock_rmsd.ref
+        } 
+    }
+} 
+
+colvar {
+  name lip_dist
+
+  upperWall         3.0
+  upperWallConstant 0
+
+  distance {
+    group1 {
+      atomnumbers {40080 40099 40107 40195 40155 40210 40167 40750 40769 40777 40865 40825 40880 40837 47450 47469 47477 47565 47525 47580 47537}
+      #atomNameResidueRange  P   147 92 97
+      rotateReference
+      centerReference
+      fittingGroup {                    # protein atoms
+          atomsFile          restraints/lip_pock_rmsd.ref
+          atomsCol           O
+      } 
+      refPositionsFile restraints/lip_pock_rmsd.ref     # ref protein coords for fitting
+    }
+    group2 {
+      dummyAtom (0.473, -4.230, 8.706)  # center of cholesterol in reference coordinates
+    }
+  }
+}

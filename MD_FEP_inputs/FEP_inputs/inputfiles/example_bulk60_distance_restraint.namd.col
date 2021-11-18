@@ -1,0 +1,54 @@
+
+#
+# distance and rmsd restraint between 3 lipids and protein residues
+#
+Colvarstrajfrequency    100 # 1 is for testing, change back to 100
+Colvarsrestartfrequency 100
+
+
+colvar {
+     name dist_z
+  
+     distanceZ {
+     ref {
+             atomsFile           restraints/midplane.ref # only headgroups P upper monolayer
+             atomsCol            B
+             atomsColValue       1.0
+      }
+     main {
+             atomsFile           restraints/lipPC.ref # only headgroups P
+             atomsCol            B
+             atomsColValue       1.0
+     }
+  }  
+}
+
+harmonicWalls {
+    name walls
+    colvars dist_z
+    lowerWalls -5.33
+    upperWalls  5.01
+    forceConstant 100
+}
+
+colvar {
+  name Orient
+ 
+  tilt {
+    axis (0.0, 0.0, 1.0) 
+    atoms {
+     atomNumbers 3504 3579 3594 3603 3615 # resid 27 POPC  P C34 C39 C312 C316
+      }
+    refPositionsFile  restraints/lipPC_5p.ref 
+  }
+}
+
+harmonicWalls {
+    name tilt
+    colvars Orient
+    lowerWalls  0.112
+    upperWalls  1.0
+    forceConstant 100
+}
+
+
