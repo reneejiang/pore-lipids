@@ -10,3 +10,5 @@ Inside this folder, la0/ is taken as the example folder for testing the matlab c
 
 Folder MD_FEP_inputs/ includes the two subdirectories which are FEP_inputs and MD_brute_inputs. For the FEP harmonical restraints, we run the brute simulation first to get the estimated upper boundaries of our FEP_inputs, which sets the force constant=0 in brute simulations. The detailed settting of our restrains are located in the subfolders called "inputfiles/", the example_distance_restraint.namd.col, and example_rmsd_restraint.namd.col are also shown as reference for readers to use in the future.
 
+the python2 script plot_3lipids_system.ipynb is used the show the FEP related data posted in the paper.
+
